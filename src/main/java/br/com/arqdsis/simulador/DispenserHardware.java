@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 
 public class DispenserHardware {
 
+	/*
+	 * 
+	 * Class responsável por simular o hardware do dispenser (quantidade de notas e combinações)
+	 * 
+	 */
 	private static BigDecimal valorTotalNoDispenser;
 	private static Integer qtdNota10 = 1000;
 	private static Integer qtdNota20 = 1000;

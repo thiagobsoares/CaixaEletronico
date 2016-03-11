@@ -8,10 +8,9 @@ import br.com.arqdsis.simulador.DispenserHardware;
 
 public class SaqueController {
 
-	private Conta conta;
 	private DispenserHardware dispenserHardware;
 
-	public void sacarDinheiro(BigDecimal valorDoSaque) {
+	public void sacarDinheiro(Conta conta, BigDecimal valorDoSaque) {
 
 		Saque saque = new Saque(conta, valorDoSaque);
 

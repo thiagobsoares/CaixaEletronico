@@ -14,6 +14,9 @@ public class DispenserHardware {
 	private static Integer qtdNota20 = 1000;
 	private static Integer qtdNota50 = 500;
 	
+	public DispenserHardware(){
+		atualizarValorTotalDispenser();
+	}
 	private void atualizarValorTotalDispenser(){
 		valorTotalNoDispenser = new BigDecimal(qtdNota10 * 10 + qtdNota20 * 20 + qtdNota50 * 50);
 	}

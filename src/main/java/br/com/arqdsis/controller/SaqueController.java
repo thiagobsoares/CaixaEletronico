@@ -13,11 +13,12 @@ public class SaqueController {
 	public void sacarDinheiro(Conta conta, BigDecimal valorDoSaque) {
 
 		Saque saque = new Saque(conta, valorDoSaque);
-
+		dispenserHardware = new DispenserHardware();
+		
 		if (saque.checarSaldoSuficienteParaSaque()) {
 			if (dispenserHardware.checarDisponibilidadeDeNotas(valorDoSaque)) {
-				saque.realizarSaque();				
-			}else{
+				saque.realizarSaque();
+			} else {
 				System.out.println("Combinação invalida");
 			}
 		} else {

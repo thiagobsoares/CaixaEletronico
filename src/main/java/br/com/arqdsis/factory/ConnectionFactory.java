@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	private static final String ip = "jdbc:mysql://localhost/CaixaEletronico";
 	private static final String usuario = "root";
-	private static final String senha = "valkms#7028";
+	private static final String senha = "multiplus";
 	
 	public static Connection getConnection() {
 		try {

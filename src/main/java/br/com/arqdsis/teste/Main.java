@@ -16,10 +16,9 @@ public class Main {
 		 */
 		Conta conta = new Conta();
 		
-		conta.setNumeroConta(000L);
-		conta.setNumeroAgencia(0000L);
-		conta.setSaldo(new BigDecimal("2000"));
-		
+		conta.setNumeroConta(01L);
+		conta.setNumeroAgencia(01L);
+		conta.setSaldo(new BigDecimal("500000"));
 		SaqueController controller = new SaqueController();
 		controller.sacarDinheiro(conta, new BigDecimal("1000"));
 		

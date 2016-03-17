@@ -10,7 +10,7 @@ import br.com.arqdsis.models.TO.SaqueTO;
 public class SaqueDAO {
 
 	public Boolean atualizarSaldo(SaqueTO saqueTO) {
-		String sql = "UPDATE conta SET saldo = ? WHERE conta = ? and agencia = ?";
+		String sql = "UPDATE conta SET saldo = ? WHERE numeroConta = ? and numeroAgencia = ?";
 		
 		try(Connection conn = ConnectionFactory.getConnection()){
 			PreparedStatement stmt = conn.prepareStatement(sql);

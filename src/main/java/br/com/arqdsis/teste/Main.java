@@ -11,7 +11,7 @@ public class Main {
 		 * 
 		 * Teste realizado com sucesso até a parte que o projeto 
 		 * conecta com o banco de dados, por não estar implementado,
-		 * ocorre erro.
+		 * ocorre um erro.
 		 * 
 		 */
 		Conta conta = new Conta();

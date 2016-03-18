@@ -55,7 +55,7 @@ public class DispenserHardware {
 		valorTotalNoDispenser = new BigDecimal(qtdNota10 * 10 + qtdNota20 * 20 + qtdNota50 * 50);
 	}
 
-	public Boolean checarDisponibilidadeDeNotas(BigDecimal valorDoSaque) {
+	public Boolean realizarSaqueNoDispenser(BigDecimal valorDoSaque) {
 		if (checarValorDispenserMenorQueValorSaque(valorDoSaque)) {
 			if (checarCombinacaoDasNotas(valorDoSaque)) {
 				atualizarValorTotalDispenser();
@@ -67,29 +67,27 @@ public class DispenserHardware {
 
 	private boolean checarCombinacaoDasNotas(BigDecimal valorDoSaque) {
 		BigDecimal valorDoSaqueAuxiliar = new BigDecimal(valorDoSaque.toBigInteger());
-		Integer qtdNota50Aux = qtdNota50;
-		Integer qtdNota20Aux = qtdNota20;
-		Integer qtdNota10Aux = qtdNota10;
+		Integer qtdNota50Aux = new Integer(qtdNota50);
+		Integer qtdNota20Aux = new Integer(qtdNota20);
+		Integer qtdNota10Aux = new Integer(qtdNota10);
 
 		qtdNota50Aux -= valorDoSaqueAuxiliar.divide(new BigDecimal(50)).intValue();
-
 		if (qtdNota50Aux < 0) {
-			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.subtract(new BigDecimal(qtdNota50Aux * 50));
+			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.subtract(new BigDecimal(qtdNota50 * 50));
 			qtdNota50Aux = 0;
 		} else {
 			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.remainder(new BigDecimal(50));
 		}
-
 		qtdNota20Aux -= valorDoSaqueAuxiliar.divide(new BigDecimal(20)).intValue();
 
 		if (qtdNota20Aux < 0) {
-			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.subtract(new BigDecimal(qtdNota20Aux * 20));
+			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.subtract(new BigDecimal(qtdNota20 * 20));
 			qtdNota20Aux = 0;
 		} else {
 			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.remainder(new BigDecimal(20));
 		}
 
-		qtdNota10Aux -= valorDoSaqueAuxiliar.divide(new BigDecimal(50)).intValue();
+		qtdNota10Aux -= valorDoSaqueAuxiliar.divide(new BigDecimal(10)).intValue();
 
 		if (qtdNota10Aux < 0) {
 			System.out.println("Quantidade de notas insuficientes");

@@ -16,7 +16,7 @@ public class SaqueController {
 		dispenserHardware = new DispenserHardware();
 		
 		if (saque.checarSaldoSuficienteParaSaque()) {
-			if (dispenserHardware.checarDisponibilidadeDeNotas(valorDoSaque)) {
+			if (dispenserHardware.realizarSaqueNoDispenser(valorDoSaque)) {
 				saque.realizarSaque();
 			} else {
 				System.out.println("Combinação invalida");

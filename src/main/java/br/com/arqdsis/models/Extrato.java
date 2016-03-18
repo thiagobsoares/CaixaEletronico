@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.arqdsis.dao.ExtratoDAO;
+import br.com.arqdsis.dao.RegistroDeOperacaoDAO;
 import br.com.arqdsis.models.TO.ExtratoTO;
 
 public class Extrato {
 
-	private ExtratoDAO extratoDAO;
+	private RegistroDeOperacaoDAO dao;
 	private List<RegistroDeOperacao> listaRegistro;
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
@@ -20,6 +20,7 @@ public class Extrato {
 		this.dataInicio = dataInicio;
 		this.dataFinal = dataFinal;
 		this.conta = conta;
+		dao = new RegistroDeOperacaoDAO();
 	}
 
 	public Conta getConta() {
@@ -58,13 +59,9 @@ public class Extrato {
 		listaRegistro.add(registroDoExtrato);
 	}
 
-	public List<RegistroDeOperacao> consultar() {
+	public Boolean recuperarTodosRegistrosDeOperacoes() {
 		ExtratoTO extratoTO = new ExtratoTO(conta, dataInicio, dataFinal, listaRegistro);
-		if (extratoDAO.consultar(extratoTO)) {
-			return this.listaRegistro;
-		} else {
-			return null;
-		}
+		return dao.consultarTodasOperacoes(extratoTO);
 	}
 	
 	

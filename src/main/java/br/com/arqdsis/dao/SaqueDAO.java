@@ -11,14 +11,16 @@ public class SaqueDAO {
 
 	public Boolean atualizarSaldo(SaqueTO saqueTO) {
 		String sql = "UPDATE conta SET saldo = ? WHERE numeroConta = ? and numeroAgencia = ?";
-		
 		try(Connection conn = ConnectionFactory.getConnection()){
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setBigDecimal(1, saqueTO.getValorNovoSaldo());
 			stmt.setLong(2, saqueTO.getConta().getNumeroConta());
 			stmt.setLong(3, saqueTO.getConta().getNumeroAgencia());
 			
-			return stmt.execute();
+			
+			stmt.execute();
+			
+			return true;
 			
 		}catch(SQLException error){
 			error.printStackTrace();

@@ -1,18 +1,28 @@
 package br.com.arqdsis.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import br.com.arqdsis.dao.RegistroDeOperacaoDAO;
 import br.com.arqdsis.models.TO.RegistroDeOperacaoTO;
 
-public class RegistroDeOperacao {
+public class RegistroDeOperacao implements Comparable<RegistroDeOperacao> {
 
 	private Long numeroDocumento;
-	private LocalDateTime dataLancamento;
+	private LocalDate dataLancamento;
 	private String tipoOperacao;
 	private String tipoLancamento;
 	private BigDecimal valorDaOperacao;
+
+
+	public final static String TIPO_LANCAMENTO_CREDITO = "Crédito";
+	public final static String TIPO_LANCAMENTO_DEBITO = "Débito";
+	
+	private RegistroDeOperacaoDAO dao;
+
+	public RegistroDeOperacao() {
+		dao = new RegistroDeOperacaoDAO();
+	}
 
 	public Long getNumeroDocumento() {
 		return numeroDocumento;
@@ -22,11 +32,11 @@ public class RegistroDeOperacao {
 		this.numeroDocumento = numeroDocumento;
 	}
 
-	public LocalDateTime getDataLancamento() {
+	public LocalDate getDataLancamento() {
 		return dataLancamento;
 	}
 
-	public void setDataLancamento(LocalDateTime dataLancamento) {
+	public void setDataLancamento(LocalDate dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
 
@@ -55,39 +65,52 @@ public class RegistroDeOperacao {
 	}
 
 	public Boolean registrarOperacao(Conta conta) {
-		RegistroDeOperacaoDAO dao = new RegistroDeOperacaoDAO();
 		RegistroDeOperacaoTO registroTO = new RegistroDeOperacaoTO();
-		registroTO.setRegistroDeOperacao(this);
-		registroTO.setConta(conta);
 
-		dao.registrarOperacao(registroTO);
+		registroTO.setConta(conta);
+		registroTO.setNumeroDocumento(this.numeroDocumento);
+		registroTO.setDataLancamento(this.dataLancamento);
+		registroTO.setTipoLancamento(this.tipoLancamento);
+		registroTO.setTipoOperacao(this.tipoOperacao);
+		registroTO.setValorDaOperacao(this.valorDaOperacao);
+
+		Long numeroDocumento = dao.registrarOperacao(registroTO);
+		
+		if(numeroDocumento != -1){
+			this.numeroDocumento = numeroDocumento;
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public Boolean consultarOperacao(Long numeroDocumento) {
+
+		RegistroDeOperacaoTO registro = dao.consultarOperacaoUnica(numeroDocumento);
+		this.numeroDocumento = registro.getNumeroDocumento();
+		this.dataLancamento = registro.getDataLancamento();
+		this.tipoLancamento = registro.getTipoLancamento();
+		this.tipoOperacao = registro.getTipoOperacao();
+		this.valorDaOperacao = registro.getValorDaOperacao();
 
 		return true;
 	}
 
-	public RegistroDeOperacao consultarOperacao(Long numeroDocumento) {
-		RegistroDeOperacaoDAO dao = new RegistroDeOperacaoDAO();
-
-		return dao.consultarOperacao(numeroDocumento);
-
+	@Override
+	public String toString() {
+		return "numeroDocumento=" + numeroDocumento + "\ntipoOperacao=" + tipoOperacao;
 	}
 
 	@Override
-	public String toString() {
-		return "RegistroDeOperacao [numeroDocumento=" + numeroDocumento + ", dataLancamento=" + dataLancamento
-				+ ", tipoOperacao=" + tipoOperacao + ", tipoLancamento=" + tipoLancamento + ", valorDaOperacao="
-				+ valorDaOperacao + "]";
+	public int compareTo(RegistroDeOperacao obj) {
+		return numeroDocumento.compareTo(obj.getNumeroDocumento());
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dataLancamento == null) ? 0 : dataLancamento.hashCode());
 		result = prime * result + ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
-		result = prime * result + ((tipoLancamento == null) ? 0 : tipoLancamento.hashCode());
-		result = prime * result + ((tipoOperacao == null) ? 0 : tipoOperacao.hashCode());
-		result = prime * result + ((valorDaOperacao == null) ? 0 : valorDaOperacao.hashCode());
 		return result;
 	}
 
@@ -100,25 +123,10 @@ public class RegistroDeOperacao {
 		if (getClass() != obj.getClass())
 			return false;
 		RegistroDeOperacao other = (RegistroDeOperacao) obj;
-		if (dataLancamento == null) {
-			if (other.dataLancamento != null)
+		if (numeroDocumento == null) {
+			if (other.numeroDocumento != null)
 				return false;
-		} else if (!dataLancamento.equals(other.dataLancamento))
-			return false;
-		if (tipoLancamento == null) {
-			if (other.tipoLancamento != null)
-				return false;
-		} else if (!tipoLancamento.equals(other.tipoLancamento))
-			return false;
-		if (tipoOperacao == null) {
-			if (other.tipoOperacao != null)
-				return false;
-		} else if (!tipoOperacao.equals(other.tipoOperacao))
-			return false;
-		if (valorDaOperacao == null) {
-			if (other.valorDaOperacao != null)
-				return false;
-		} else if (!valorDaOperacao.equals(other.valorDaOperacao))
+		} else if (!numeroDocumento.equals(other.numeroDocumento))
 			return false;
 		return true;
 	}

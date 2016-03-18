@@ -1,6 +1,7 @@
 package br.com.arqdsis.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import br.com.arqdsis.dao.SaqueDAO;
@@ -49,9 +50,8 @@ public class Saque {
 			
 			RegistroDeOperacao registroDeOperacao = new RegistroDeOperacao();
 			
-			registroDeOperacao.setNumeroDocumento(00000l);
-			registroDeOperacao.setDataLancamento(LocalDateTime.now());
-			registroDeOperacao.setTipoLancamento("D");
+			registroDeOperacao.setDataLancamento(LocalDate.now());
+			registroDeOperacao.setTipoLancamento(RegistroDeOperacao.TIPO_LANCAMENTO_DEBITO);
 			registroDeOperacao.setTipoOperacao("Saque");
 			registroDeOperacao.setValorDaOperacao(this.valorDoSaque);
 			

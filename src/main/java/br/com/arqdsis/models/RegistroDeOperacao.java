@@ -2,6 +2,8 @@ package br.com.arqdsis.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 import br.com.arqdsis.dao.RegistroDeOperacaoDAO;
 import br.com.arqdsis.models.TO.RegistroDeOperacaoTO;
@@ -17,6 +19,7 @@ public class RegistroDeOperacao implements Comparable<RegistroDeOperacao> {
 
 	public final static String TIPO_LANCAMENTO_CREDITO = "Crédito";
 	public final static String TIPO_LANCAMENTO_DEBITO = "Débito";
+	public static final String TIPO_OPERACAO_SAQUE = "Saque";
 	
 	private RegistroDeOperacaoDAO dao;
 
@@ -32,8 +35,9 @@ public class RegistroDeOperacao implements Comparable<RegistroDeOperacao> {
 		this.numeroDocumento = numeroDocumento;
 	}
 
-	public LocalDate getDataLancamento() {
-		return dataLancamento;
+	public String getDataLancamento() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return dataLancamento.format(formatter);
 	}
 
 	public void setDataLancamento(LocalDate dataLancamento) {
@@ -129,6 +133,24 @@ public class RegistroDeOperacao implements Comparable<RegistroDeOperacao> {
 		} else if (!numeroDocumento.equals(other.numeroDocumento))
 			return false;
 		return true;
+	}
+	
+	public static Comparator<RegistroDeOperacao> comparatorPorData(){
+		return new Comparator<RegistroDeOperacao>() {
+
+			@Override
+			public int compare(RegistroDeOperacao o1, RegistroDeOperacao o2) {
+				String[] os1 = o1.getDataLancamento().split("/");
+				String[] os2 = o2.getDataLancamento().split("/");
+				if(!os1[2].equals(os2[2]))
+					return os1[2].compareTo(os2[2]);
+				else if(!os1[1].equals(os2[1]))
+					return os1[1].compareTo(os2[1]);
+				else
+					return os1[0].compareTo(os2[0]);
+			}
+			
+		};
 	}
 
 }

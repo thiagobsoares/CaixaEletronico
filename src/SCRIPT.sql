@@ -1,15 +1,19 @@
-SQL
-
 create database CaixaEletronico;
 
 use CaixaEletronico;
 
-create table Conta(
-	numeroConta integer not null,
-    numeroAgencia integer not null,
-    saldo decimal(15,2) not null,
-	primary key(numeroConta,numeroAgencia)
-);
+CREATE TABLE conta (
+  numeroConta int(11) NOT NULL,
+  numeroAgencia int(11) NOT NULL,
+  saldo decimal(15,2) NOT NULL,
+  cliente varchar(255) NOT NULL,
+  administrador tinyint(1) DEFAULT '0',
+  senha int(6) NOT NULL,
+  PRIMARY KEY (numeroConta,numeroAgencia);
+) 
+
+INSERT INTO conta VALUES (123123,1234,1000000.00,'Joãozinho da Petrobras',0,123123);
+
 
 create table RegistroDeOperacao(
 	numeroDocumento integer primary key auto_increment,
@@ -21,5 +25,3 @@ create table RegistroDeOperacao(
     valorDaOperacao decimal(10,2) not null,
     FOREIGN KEY ( numeroConta, numeroAgencia ) REFERENCES Conta (numeroConta, numeroAgencia)
 );
-
-INSERT INTO Conta (numeroConta, numeroAgencia, saldo) VALUES (01, 01 , 5000000);

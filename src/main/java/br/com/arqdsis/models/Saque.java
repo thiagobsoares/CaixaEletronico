@@ -52,7 +52,7 @@ public class Saque {
 			
 			registroDeOperacao.setDataLancamento(LocalDate.now());
 			registroDeOperacao.setTipoLancamento(RegistroDeOperacao.TIPO_LANCAMENTO_DEBITO);
-			registroDeOperacao.setTipoOperacao("Saque");
+			registroDeOperacao.setTipoOperacao(RegistroDeOperacao.TIPO_OPERACAO_SAQUE);
 			registroDeOperacao.setValorDaOperacao(this.valorDoSaque);
 			
 			registroDeOperacao.registrarOperacao(conta);

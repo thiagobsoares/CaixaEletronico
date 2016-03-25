@@ -2,6 +2,7 @@ package br.com.arqdsis.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.arqdsis.dao.RegistroDeOperacaoDAO;
@@ -61,8 +62,12 @@ public class Extrato {
 
 	public Boolean recuperarTodosRegistrosDeOperacoes() {
 		ExtratoTO extratoTO = new ExtratoTO(conta, dataInicio, dataFinal, listaRegistro);
-		return dao.consultarTodasOperacoes(extratoTO);
+		if (dao.consultarTodasOperacoes(extratoTO)) {
+			Collections.sort(listaRegistro, RegistroDeOperacao.comparatorPorData());
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
-	
+
 }

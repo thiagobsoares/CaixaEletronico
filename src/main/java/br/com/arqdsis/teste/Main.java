@@ -3,7 +3,6 @@ package br.com.arqdsis.teste;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.arqdsis.controller.SaqueController;
 import br.com.arqdsis.models.Conta;
 import br.com.arqdsis.models.RegistroDeOperacao;
 
@@ -33,9 +32,9 @@ public class Main {
 			int lanc = (int) (Math.random() * 2) + 1;
 			
 			if (lanc == 1)
-				registro.setTipoLancamento(registro.TIPO_LANCAMENTO_CREDITO);
+				registro.setTipoLancamento(RegistroDeOperacao.TIPO_LANCAMENTO_CREDITO);
 			else
-				registro.setTipoLancamento(registro.TIPO_LANCAMENTO_DEBITO);
+				registro.setTipoLancamento(RegistroDeOperacao.TIPO_LANCAMENTO_DEBITO);
 			
 			registro.setTipoOperacao("Movimentação");
 			registro.setValorDaOperacao(new BigDecimal((int)(Math.random() * 1000)));

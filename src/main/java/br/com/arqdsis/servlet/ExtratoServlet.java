@@ -29,21 +29,31 @@ public class ExtratoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/extrato.jsp");
 		req.setAttribute("conta", ContaLogada.conta);
+		req.setAttribute("dataAtual", LocalDate.now());
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/extrato.jsp");
+		
 		String parData = req.getParameter("data");
+		String parDataFim = req.getParameter("dataFim");
+		
 		req.setAttribute("conta", ContaLogada.conta);
+		req.setAttribute("dataAtual", LocalDate.now());
 
 		if (parData != null) {
-			Integer dias = Integer.parseInt(parData);
 
-			LocalDate inicial = LocalDate.now().minusDays(dias);
-			LocalDate fim = LocalDate.now();
-
+			LocalDate inicial = LocalDate.parse(parData);
+			LocalDate fim;
+			
+			if(parDataFim == null)
+				fim = LocalDate.now();
+			else
+				fim = LocalDate.parse(parDataFim);
+			
 			extrato = new Extrato(ContaLogada.conta, inicial, fim);
 			extrato.recuperarTodosRegistrosDeOperacoes();
 			List<RegistroDeOperacao> listaRegistro = extrato.getListaRegistro();

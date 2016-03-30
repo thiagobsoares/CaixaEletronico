@@ -6,6 +6,9 @@
 <html>
 <head>
 
+<script src="./resources/js/jquery-2.2.2.js"></script>
+<script src="./resources/js/bootstrap.js"></script>
+<script src="./resources/js/extrato.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="./resources/css/estrutura.css">
 </head>
@@ -20,15 +23,20 @@
 			<form action="./extrato" method="POST">
 				<div class=col-md-9>
 					<div class="radio radio-data-extrato">
-						<label><input type="radio" name="data" value="7">Últimos
-							7 dias</label> <label><input type="radio" name="data" value="15">Últimos
-							15 dias</label> <label><input type="radio" name="data">Período
-							específico</label>
+						<label><input type="radio" name="data"
+							value="${dataAtual.minusDays(7)}">Últimos 7 dias</label> <label><input
+							type="radio" name="data" value="${dataAtual.minusDays(15)}">Últimos
+							15 dias</label> <label><input class="periodo-especifico"
+							type="radio" name="data">Período específico</label>
 					</div>
 				</div>
 				<div class=col-md-2>
 					<input class="btn-lg btn-default" type="submit" value="Consultar" />
 				</div>
+				<div class=col-md-12>
+					<!-- Colocar data selecionada aqui -->
+				</div>
+
 			</form>
 
 
@@ -43,18 +51,19 @@
 							<th>Valor</th>
 						</tr>
 						<c:forEach items="${registros}" var="registro">
-						<tr>
-							<td>${registro.numeroDocumento}</td>
-							<td>${registro.dataLancamento}</td>
-							<td>${registro.tipoOperacao}</td>
-							<td>${registro.tipoLancamento}</td>
-							<td>${registro.valorDaOperacao}</td>
-						</tr>
+							<tr>
+								<td>${registro.numeroDocumento}</td>
+								<td>${registro.dataLancamento}</td>
+								<td>${registro.tipoOperacao}</td>
+								<td>${registro.tipoLancamento}</td>
+								<td>${registro.valorDaOperacao}</td>
+							</tr>
 						</c:forEach>
 					</table>
 				</div>
 			</c:if>
 		</div>
 	</div>
+
 </body>
 </html>

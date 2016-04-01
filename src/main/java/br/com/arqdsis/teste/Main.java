@@ -22,13 +22,10 @@ public class Main {
 		RegistroDeOperacao registro = new RegistroDeOperacao();
 
 
-		int num = 0;
+		int num = 50;
 
 		for (int i = 0; i < num; i++) {
-			int ano = (int) (Math.random() * 3);
-			int mes = (int) (Math.random() * 12) + 1;
-			int dia = (int) (Math.random() * 27) + 1;
-			registro.setDataLancamento(LocalDate.of(ano + 2012, mes, dia));
+			registro.setDataLancamento(LocalDate.now().minusDays((long)(Math.random() * 5)));
 			int lanc = (int) (Math.random() * 2) + 1;
 			
 			if (lanc == 1)

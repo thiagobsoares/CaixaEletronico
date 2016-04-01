@@ -9,4 +9,7 @@ public class ContaLogada {
 
 	public static Conta conta;
 	
+	public static void atualizarConta(){
+		conta.recuperarConta();
+	}
 }

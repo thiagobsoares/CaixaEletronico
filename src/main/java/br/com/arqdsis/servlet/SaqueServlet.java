@@ -30,15 +30,19 @@ public class SaqueServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher;
+		Boolean sucesso = false;
 		String parameter = req.getParameter("valor");
 		req.setAttribute("conta", ContaLogada.conta);
-		RequestDispatcher dispatcher;
-
+		req.setAttribute("resposta", sucesso);
+		
 		if (parameter != null) {
 			SaqueController controller = new SaqueController();
 			BigDecimal valorDoSaque = new BigDecimal(parameter);
 
-			controller.sacarDinheiro(ContaLogada.conta, valorDoSaque);
+			if (controller.sacarDinheiro(ContaLogada.conta, valorDoSaque)) {
+				sucesso = true;
+			}
 
 			dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/resposta-saque.jsp");
 		} else {

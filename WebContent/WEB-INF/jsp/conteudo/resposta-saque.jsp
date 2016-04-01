@@ -20,7 +20,21 @@
 			<div class="col-md-12">
 				<h2 class="conteudo-titulo">Saque</h2>
 			</div>
-			<p> Saque realizado com sucesso</p>
+			<c:if test="${sucesso}">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<p class="text-danger">Saque realizado com sucesso.</p>
+					</div>
+				</div>
+			</c:if>
+			
+			<c:if test="${not sucesso}">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<p class="text-danger">Ocorreu error.</p>
+					</div>
+				</div>
+			</c:if>
 		</div>
 	</div>
 

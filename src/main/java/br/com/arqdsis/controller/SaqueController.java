@@ -11,8 +11,8 @@ public class SaqueController {
 
 	private DispenserHardware dispenserHardware;
 
-	public void sacarDinheiro(Conta conta, BigDecimal valorDoSaque) {
-
+	public Boolean sacarDinheiro(Conta conta, BigDecimal valorDoSaque) {
+		Boolean retorno = false;
 		Saque saque = new Saque(conta, valorDoSaque);
 		dispenserHardware = new DispenserHardware();
 
@@ -20,6 +20,8 @@ public class SaqueController {
 			if (dispenserHardware.realizarSaqueNoDispenser(valorDoSaque)) {
 				saque.realizarSaque();
 				ContaLogada.atualizarConta();
+				
+				retorno = true;
 			} else {
 				System.out.println("Combinação invalida");
 			}
@@ -27,5 +29,6 @@ public class SaqueController {
 			System.out.println("Saldo insuficiente");
 		}
 		System.out.println(ContaLogada.conta.getSaldo());
-	}
+		return retorno;
+	}	
 }

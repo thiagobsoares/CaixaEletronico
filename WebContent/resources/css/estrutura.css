@@ -55,3 +55,8 @@ body {
 .conteudo-saque .botao-direito{
 	text-align: right;	
 }
+
+.conteudo-saque .botao-meio{
+	text-align: center;	
+	margin-top: 70px;	
+}

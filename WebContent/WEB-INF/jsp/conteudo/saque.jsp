@@ -24,11 +24,11 @@
 				<form action="./saque" method="POST">
 					<div class="col-md-3 botao-esquerda">
 						<button class="btn-lg btn-default" value="10" name="valor">R$
-							10,00</button>
+							10.00</button>
 						<button class="btn-lg btn-default" value="20" name="valor">R$
-							20,00</button>
+							20.00</button>
 						<button class="btn-lg btn-default" value="50" name="valor">R$
-							50,00</button>
+							50.00</button>
 					</div>
 					<div class="col-md-6 botao-meio">
 						<input type="text" name="valor" /> <input type="submit"
@@ -37,11 +37,11 @@
 					</div>
 					<div class="col-md-3 botao-direito">
 						<button class="btn-lg btn-default" value="100" name="valor">R$
-							100,00</button>
+							100.00</button>
 						<button class="btn-lg btn-default" value="200" name="valor">R$
-							200,00</button>
+							200.00</button>
 						<button class="btn-lg btn-default" value="500" name="valor">R$
-							500,00</button>
+							500.00</button>
 
 					</div>
 				</form>

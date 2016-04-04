@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.arqdsis.factory.ConnectionFactory;
-import br.com.arqdsis.models.Conta;
+import br.com.arqdsis.models.TO.ContaTO;
 
 public class ContaDAO {
 
-	public Boolean recuperarConta(Conta conta) {
+	public ContaTO recuperarConta(ContaTO conta) {
 		String sql = "SELECT * FROM conta WHERE numeroConta = ? and numeroAgencia = ? and senha = ?";
 		try (Connection conn = ConnectionFactory.getConnection()) {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -24,14 +24,14 @@ public class ContaDAO {
 				conta.setCliente(rs.getString("cliente"));
 				conta.setSaldo(rs.getBigDecimal("saldo"));
 				conta.setAdministrador(rs.getBoolean("administrador"));
-				return true;
+				return conta;
 			} else {
-				return false;
+				return null;
 			}
 
 		} catch (SQLException error) {
 			error.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 

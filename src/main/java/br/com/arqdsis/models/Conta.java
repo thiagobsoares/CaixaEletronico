@@ -3,6 +3,7 @@ package br.com.arqdsis.models;
 import java.math.BigDecimal;
 
 import br.com.arqdsis.dao.ContaDAO;
+import br.com.arqdsis.models.TO.ContaTO;
 
 public class Conta {
 
@@ -68,6 +69,23 @@ public class Conta {
 	}
 
 	public Boolean recuperarConta() {
-		return contaDAO.recuperarConta(this);
+		ContaTO contaTO = new ContaTO();
+
+		contaTO.setNumeroAgencia(numeroAgencia);
+		contaTO.setNumeroConta(numeroConta);
+		contaTO.setSenha(senha);
+		if(contaDAO.recuperarConta(contaTO) != null){
+			
+			cliente = contaTO.getCliente();
+			numeroAgencia = contaTO.getNumeroAgencia();
+			numeroConta = contaTO.getNumeroConta();
+			senha = contaTO.getSenha();
+			saldo = contaTO.getSaldo();
+			administrador = contaTO.getAdministrador();
+			
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

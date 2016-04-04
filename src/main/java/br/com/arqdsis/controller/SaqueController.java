@@ -20,7 +20,6 @@ public class SaqueController {
 			if (dispenserHardware.realizarSaqueNoDispenser(valorDoSaque)) {
 				saque.realizarSaque();
 				ContaLogada.atualizarConta();
-				
 				retorno = true;
 			} else {
 				System.out.println("Combinação invalida");

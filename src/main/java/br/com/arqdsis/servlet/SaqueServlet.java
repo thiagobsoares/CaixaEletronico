@@ -32,11 +32,32 @@ public class SaqueServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		Boolean sucesso = false;
-		String parameter = req.getParameter("valor");
+
+		String[] parameterValues = req.getParameterValues("valor");
+		String parameter = null;
+
+		/*
+		 * Gambiarra.
+		 */
+		if (parameterValues.length > 1) {
+			if (parameterValues[0].equals("") && !parameterValues[1].equals("")) {
+				parameter = parameterValues[1];
+			}
+
+			if (!parameterValues[0].equals("") && parameterValues[1].equals("")) {
+				parameter = parameterValues[0];
+			}
+
+			if (parameterValues[0].equals("10") && !parameterValues[1].equals("")) {
+				parameter = parameterValues[1];
+			}
+		} else {
+			parameter = parameterValues[0];
+		}
+
 		req.setAttribute("conta", ContaLogada.conta);
-		req.setAttribute("resposta", sucesso);
-		
-		if (parameter != null) {
+
+		if (parameter != null && parameter.matches("\\d+")) {
 			SaqueController controller = new SaqueController();
 			BigDecimal valorDoSaque = new BigDecimal(parameter);
 
@@ -48,6 +69,7 @@ public class SaqueServlet extends HttpServlet {
 		} else {
 			dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/saque.jsp");
 		}
+		req.setAttribute("resposta", sucesso);
 		dispatcher.forward(req, resp);
 	}
 

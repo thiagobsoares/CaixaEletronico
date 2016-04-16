@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import br.com.arqdsis.excecoes.SaqueException;
 import br.com.arqdsis.models.Conta;
 import br.com.arqdsis.models.Saque;
 
@@ -15,7 +16,7 @@ public class TesteSaque {
 	 * Saldo da conta de teste irá começar com 500.000
 	 */
 	@Test
-	public void testValorDoSaqueEhValido() {
+	public void testValorDoSaqueEhValido() throws SaqueException {
 		Conta conta = new Conta();
 		
 		conta.setNumeroAgencia(1l);
@@ -33,7 +34,7 @@ public class TesteSaque {
 	}
 	
 	@Test
-	public void testChecarSaldoSuficienteParaSaque() {
+	public void testChecarSaldoSuficienteParaSaque() throws SaqueException {
 		Conta conta = new Conta();
 		
 		conta.setNumeroAgencia(1l);
@@ -56,7 +57,7 @@ public class TesteSaque {
 	 * Alem disso, se a operação foi registrado no extrato da conta. 
 	 */
 	@Test
-	public void testRealizarSaque() {
+	public void testRealizarSaque() throws SaqueException {
 		Conta conta = new Conta();
 		
 		conta.setNumeroAgencia(1l);

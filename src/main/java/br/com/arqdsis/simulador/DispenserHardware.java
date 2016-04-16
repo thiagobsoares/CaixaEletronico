@@ -2,6 +2,8 @@ package br.com.arqdsis.simulador;
 
 import java.math.BigDecimal;
 
+import br.com.arqdsis.excecoes.SaqueException;
+
 public class DispenserHardware {
 
 	/*
@@ -55,7 +57,7 @@ public class DispenserHardware {
 		valorTotalNoDispenser = new BigDecimal(qtdNota10 * 10 + qtdNota20 * 20 + qtdNota50 * 50);
 	}
 
-	public Boolean realizarSaqueNoDispenser(BigDecimal valorDoSaque) {
+	public Boolean realizarSaqueNoDispenser(BigDecimal valorDoSaque) throws SaqueException {
 		if (checarValorDispenserMenorQueValorSaque(valorDoSaque)) {
 			if (checarCombinacaoDasNotas(valorDoSaque)) {
 				atualizarValorTotalDispenser();
@@ -65,7 +67,7 @@ public class DispenserHardware {
 		return false;
 	}
 
-	private boolean checarCombinacaoDasNotas(BigDecimal valorDoSaque) {
+	private boolean checarCombinacaoDasNotas(BigDecimal valorDoSaque) throws SaqueException {
 		BigDecimal valorDoSaqueAuxiliar = new BigDecimal(valorDoSaque.toBigInteger());
 		Integer qtdNota50Aux = new Integer(qtdNota50);
 		Integer qtdNota20Aux = new Integer(qtdNota20);
@@ -90,8 +92,7 @@ public class DispenserHardware {
 		qtdNota10Aux -= valorDoSaqueAuxiliar.divide(new BigDecimal(10)).intValue();
 
 		if (qtdNota10Aux < 0) {
-			System.out.println("Quantidade de notas insuficientes");
-			return false;
+			throw new SaqueException("Quantidade de notas insuficientes");
 		} else {
 			valorDoSaqueAuxiliar = valorDoSaqueAuxiliar.remainder(new BigDecimal(10));
 		}
@@ -100,7 +101,6 @@ public class DispenserHardware {
 			atualizarQuantidadeDeNotasDoDispenser(qtdNota10Aux, qtdNota20Aux, qtdNota50Aux);
 			return true;
 		} else {
-			System.out.println("Combinação invalida");
 			return false;
 		}
 
@@ -115,10 +115,8 @@ public class DispenserHardware {
 
 	private Boolean checarValorDispenserMenorQueValorSaque(BigDecimal valorDoSaque) {
 		if (valorDoSaque.compareTo(valorTotalNoDispenser) <= 0) {
-			System.out.println("transação permitida");
 			return true;
 		} else {
-			System.out.println("recusar transação");
 			return false;
 		}
 	}

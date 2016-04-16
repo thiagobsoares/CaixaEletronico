@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import br.com.arqdsis.dao.SaqueDAO;
+import br.com.arqdsis.excecoes.SaqueException;
 import br.com.arqdsis.models.TO.SaqueTO;
 
 public class Saque {
@@ -13,7 +14,7 @@ public class Saque {
 	private BigDecimal valorDoSaque;
 	private SaqueDAO saqueDAO;
 
-	public Saque(Conta conta, BigDecimal valorDoSaque) {
+	public Saque(Conta conta, BigDecimal valorDoSaque) throws SaqueException {
 		this.setConta(conta);
 		this.setValorDoSaque(valorDoSaque);
 		saqueDAO = new SaqueDAO();
@@ -23,21 +24,19 @@ public class Saque {
 		return valorDoSaque;
 	}
 
-	public void setValorDoSaque(BigDecimal valorDoSaque) {
+	public void setValorDoSaque(BigDecimal valorDoSaque) throws SaqueException {
 		if (valorDoSaque.compareTo(new BigDecimal("0")) > 0) {
 			this.valorDoSaque = valorDoSaque;
 		} else {
-			System.out.println("VALOR INVALIDO");
+			throw new SaqueException("Valor inválido");
 		}
 	}
 
 	public Boolean checarSaldoSuficienteParaSaque() {
 		BigDecimal saldoAtual = conta.getSaldo();
 		if (valorDoSaque.compareTo(saldoAtual) <= 0) {
-			System.out.println("transação permitida");
 			return true;
 		} else {
-			System.out.println("recusar transação");
 			return false;
 		}
 	}

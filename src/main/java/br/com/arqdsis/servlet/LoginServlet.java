@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.arqdsis.conta_logada.ContaLogada;
 import br.com.arqdsis.models.Conta;
 
 @WebServlet("/login")
@@ -46,8 +45,7 @@ public class LoginServlet extends HttpServlet {
 
 			if (conta.recuperarConta()) {
 				dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/home.jsp");
-				ContaLogada.conta = conta;
-				req.setAttribute("conta", ContaLogada.conta);
+				req.getSession().setAttribute("conta", conta);
 			} else {
 				error = true;
 				req.setAttribute("error", error);

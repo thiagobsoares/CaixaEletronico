@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.arqdsis.conta_logada.ContaLogada;
 import br.com.arqdsis.controller.SaqueController;
+import br.com.arqdsis.excecoes.SaqueException;
+import br.com.arqdsis.models.Conta;
 
 @WebServlet("/saque")
 public class SaqueServlet extends HttpServlet {
@@ -24,7 +25,6 @@ public class SaqueServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/saque.jsp");
-		req.setAttribute("conta", ContaLogada.conta);
 		dispatcher.forward(req, resp);
 	}
 
@@ -32,8 +32,10 @@ public class SaqueServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher;
 		Boolean sucesso = false;
+		String msgRetorno = "";
 
 		String[] parameterValues = req.getParameterValues("valor");
+		Conta conta = (Conta) req.getSession().getAttribute("conta");
 		String parameter = null;
 
 		/*
@@ -55,21 +57,26 @@ public class SaqueServlet extends HttpServlet {
 			parameter = parameterValues[0];
 		}
 
-		req.setAttribute("conta", ContaLogada.conta);
+		try {
+			if (parameter != null && parameter.matches("\\d+")) {
+				SaqueController controller = new SaqueController();
+				BigDecimal valorDoSaque = new BigDecimal(parameter);
 
-		if (parameter != null && parameter.matches("\\d+")) {
-			SaqueController controller = new SaqueController();
-			BigDecimal valorDoSaque = new BigDecimal(parameter);
+				if (controller.sacarDinheiro(conta, valorDoSaque)) {
+					sucesso = true;
+					msgRetorno = "Saque realizado com sucesso.";
+				}
 
-			if (controller.sacarDinheiro(ContaLogada.conta, valorDoSaque)) {
-				sucesso = true;
+			} else {
+				throw new SaqueException("Dados Inválidos");
 			}
-
-			dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/resposta-saque.jsp");
-		} else {
-			dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/saque.jsp");
+		} catch (SaqueException ex) {
+			msgRetorno = ex.getMsg();
 		}
+
 		req.setAttribute("resposta", sucesso);
+		req.setAttribute("msgRetorno", msgRetorno);
+		dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/resposta-saque.jsp");
 		dispatcher.forward(req, resp);
 	}
 

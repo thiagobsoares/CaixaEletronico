@@ -6,12 +6,13 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import br.com.arqdsis.excecoes.SaqueException;
 import br.com.arqdsis.simulador.DispenserHardware;
 
 public class TesteDispenser {
 
 	@Test
-	public void testRealizarSaqueNoDispenser() {
+	public void testRealizarSaqueNoDispenser() throws SaqueException {
 		DispenserHardware dispenser = new DispenserHardware();
 		
 		assertEquals(new BigDecimal(55000), DispenserHardware.getValorTotalNoDispenser());

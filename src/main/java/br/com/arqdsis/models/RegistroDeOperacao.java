@@ -143,11 +143,11 @@ public class RegistroDeOperacao implements Comparable<RegistroDeOperacao> {
 				String[] os1 = o1.getDataLancamento().split("/");
 				String[] os2 = o2.getDataLancamento().split("/");
 				if(!os1[2].equals(os2[2]))
-					return os1[2].compareTo(os2[2]);
+					return os1[2].compareTo(os2[2]) * -1;
 				else if(!os1[1].equals(os2[1]))
-					return os1[1].compareTo(os2[1]);
+					return os1[1].compareTo(os2[1]) * -1;
 				else
-					return os1[0].compareTo(os2[0]);
+					return os1[0].compareTo(os2[0]) * -1;
 			}
 			
 		};

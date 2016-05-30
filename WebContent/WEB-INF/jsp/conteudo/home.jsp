@@ -8,12 +8,10 @@
 <title>Caixa Eletronico</title>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<c:import url="header.jsp" />
 	<div class="container">
-		<%@ include file="menu-lateral.jsp"%>
-		<div class="conteudo col-md-10">
-		
-		</div>
+		<c:import url="menu-lateral.jsp" />
+		<div class="conteudo col-md-10"></div>
 	</div>
 </body>
 </html>

@@ -5,17 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<script src="./resources/js/jquery-2.2.2.js"></script>
-<script src="./resources/js/bootstrap.js"></script>
-<script src="./resources/js/extrato.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/estrutura.css">
+	href="<c:url value="/resources/css/estrutura.css"/>">
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -25,7 +18,7 @@
 			<div class="col-md-12">
 				<h2 class="conteudo-titulo">Extrato</h2>
 			</div>
-			<form action="./extrato" method="POST">
+			<form action='<c:url value="/extrato"/>' method="POST">
 				<div class="col-md-9">
 					<div class="radio radio-data-extrato">
 						<label><input type="radio" name="data"
@@ -38,14 +31,13 @@
 				<div class="col-md-2">
 					<input class="btn-lg btn-default" type="submit" value="Consultar" />
 				</div>
-				<div class="col-md-8 campo-data-escolhida">
-				</div>
+				<div class="col-md-8 campo-data-escolhida"></div>
 
 			</form>
 
 
 			<c:if test="${not empty registros}">
-				<div class=col-md-12>
+				<div class="col-md-12">
 					<table id="table-extrato" class="table table-extrato table-striped">
 						<thead>
 							<tr>
@@ -73,5 +65,8 @@
 		</div>
 	</div>
 
+	<script src="<c:url value="/resources/js/extrato.js"/>"></script>
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

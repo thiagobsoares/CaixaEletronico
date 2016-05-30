@@ -5,10 +5,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="<c:url value="/resources/js/jquery-2.2.2.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/bootstrap.css">
+	href="<c:url value="/resources/css/bootstrap.css"/>">
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/estrutura.css">
+	href="<c:url value="/resources/css/estrutura.css"/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Caixa Eletronico</title>
 </head>
@@ -19,7 +21,7 @@
 			<h1>Bem Vindo, ${conta.cliente}</h1>
 		</div>
 		<div class="col-md-1">
-			<a class="btn btn-deslogar" href="./deslogar">Deslogar</a>
+			<a class="btn btn-deslogar" href="<c:url value="/deslogar"/>">Deslogar</a>
 		</div>
 	</div>
 </body>

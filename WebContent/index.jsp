@@ -6,8 +6,9 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="./resources/css/index.css">
+	href="<c:url value="/resources/css/bootstrap.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/index.css"/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Caixa Eletronico</title>
 </head>
@@ -19,12 +20,13 @@
 					Eletrônico</h1>
 			</div>
 			<div class="col-md-1 btn-logar">
-				<a class="btn-lg btn-info" href="./login">Logar</a>
+				<a class="btn-lg btn-info" href="<c:url value='/login'/>">Logar</a>
 			</div>
 		</div>
 		<div class="row">
-				<img class="img-responsive imagem-logotipo-index"
-					src="./resources/img/logotipo.jpg" />
+			<img class="img-responsive imagem-logotipo-index"
+				src='<c:url value="/resources/img/logotipo.jpg"/>' />
+
 		</div>
 	</div>
 </body>

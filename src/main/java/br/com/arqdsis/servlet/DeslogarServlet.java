@@ -17,6 +17,7 @@ public class DeslogarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getSession().removeAttribute("conta");
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(req, resp);
 	}

@@ -6,8 +6,8 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="./resources/css/login.css">
+	href="<c:url value="/resources/css/bootstrap.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login.css"/>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 </head>
@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="div-principal col-md-3 col-md-offset-4">
 				<h1>Login</h1>
-				<form action="./login" method="POST">
+				<form action='<c:url value="/login"/>' method="POST">
 					<div class="form-group">
 						<label for="agencia">Agência:</label> <input class="form-control"
 							name="agencia" id="agencia" placeholder="Digite sua agência">

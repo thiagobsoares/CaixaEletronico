@@ -6,22 +6,18 @@
 <html>
 <head>
 
-<script src="./resources/js/jquery-2.2.2.js"></script>
-<script src="./resources/js/bootstrap.js"></script>
-<script src="./resources/js/extrato.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="./resources/css/estrutura.css">
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<c:import url="header.jsp" />
 	<div class="container">
-		<%@ include file="menu-lateral.jsp"%>
+
+		<c:import url="menu-lateral.jsp" />
 		<div class="conteudo col-md-10">
 			<div class="col-md-12">
 				<h2 class="conteudo-titulo">Saque</h2>
 			</div>
 			<div class="col-md-12 conteudo-saque">
-				<form action="./saque" method="POST">
+				<form action='<c:url value="/saque"/>' method="POST">
 					<div class="col-md-3 botao-esquerda">
 						<button class="btn-lg btn-default" value="10" name="valor">R$
 							10.00</button>

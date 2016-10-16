@@ -1,8 +1,8 @@
-package br.com.arqdsis.servlet;
+package br.com.arqdsis.service;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,23 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.arqdsis.models.Conta;
+import br.com.arqdsis.util.JSonFacade;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/service/login")
+public class LoginRest extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-		dispatcher.forward(req, resp);
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		super.service(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Conta conta = null;
-		RequestDispatcher dispatcher = null;
-		Boolean error = false;
+		String msg = "";
 
 		String agencia = req.getParameter("agencia");
 		Boolean agenciaValida = agencia.matches("\\d{4}");
@@ -37,6 +40,8 @@ public class LoginServlet extends HttpServlet {
 		String senha = req.getParameter("senha");
 		Boolean senhaValida = senha.matches("\\d{6}");
 
+		PrintWriter out = resp.getWriter();
+
 		if (agenciaValida && numContaValida && senhaValida) {
 			conta = new Conta();
 			conta.setNumeroAgencia(Long.parseLong(agencia));
@@ -44,19 +49,16 @@ public class LoginServlet extends HttpServlet {
 			conta.setSenha(Long.parseLong(senha));
 
 			if (conta.recuperarContaSenha()) {
-				dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/conteudo/home.jsp");
 				req.getSession().setAttribute("conta", conta);
+				msg = "Logado com sucesso";
 			} else {
-				error = true;
-				req.setAttribute("error", error);
-				dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+				msg = "Conta não existe";
 			}
 		} else {
-			error = true;
-			req.setAttribute("error", error);
-			dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+			msg = "Dados inválidos";
 		}
-		dispatcher.forward(req, resp);
+
+		out.println(JSonFacade.menssagem(msg));
 	}
 
 }

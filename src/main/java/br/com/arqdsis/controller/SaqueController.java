@@ -19,7 +19,7 @@ public class SaqueController {
 		if (saque.checarSaldoSuficienteParaSaque()) {
 			if (dispenserHardware.realizarSaqueNoDispenser(valorDoSaque)) {
 				saque.realizarSaque();
-				conta.recuperarConta();
+				conta.recuperarContaSenha();
 				retorno = true;
 			} else {
 				throw new SaqueException("Combinação Inválida");

@@ -5,5 +5,6 @@
 	<ul class="nav nav-pills nav-stacked" role="tablist">
 		<li><a href='<c:url value="/saque"/>'>Saque</a></li>
 		<li><a href='<c:url value="/extrato"/>'>Extrato</a></li>
+		<li><a href='<c:url value="/transferencia"/>'>Transferência</a></li>
 	</ul>
 </div>

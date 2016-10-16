@@ -1,6 +1,5 @@
 package br.com.arqdsis.listener;
 
-import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
@@ -36,7 +35,6 @@ public class AtributoSessao implements HttpSessionAttributeListener {
      */
     public void attributeReplaced(HttpSessionBindingEvent se)  { 
     	System.out.println("Atributo trocado");
-         // TODO Auto-generated method stub
     }
 	
 }

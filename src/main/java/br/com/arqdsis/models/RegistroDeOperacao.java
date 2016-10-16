@@ -20,6 +20,7 @@ public class RegistroDeOperacao implements Comparable<RegistroDeOperacao> {
 	public final static String TIPO_LANCAMENTO_CREDITO = "Crédito";
 	public final static String TIPO_LANCAMENTO_DEBITO = "Débito";
 	public static final String TIPO_OPERACAO_SAQUE = "Saque";
+	public static final String TIPO_OPERACAO_TRANSFERENCIA = "Transferência";
 	
 	private RegistroDeOperacaoDAO dao;
 

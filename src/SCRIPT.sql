@@ -9,10 +9,12 @@ CREATE TABLE conta (
   cliente varchar(255) NOT NULL,
   administrador tinyint(1) DEFAULT '0',
   senha int(6) NOT NULL,
-  PRIMARY KEY (numeroConta,numeroAgencia);
-) 
+  PRIMARY KEY (numeroConta,numeroAgencia)
+);
 
-INSERT INTO conta VALUES (123123,1234,1000000.00,'Joãozinho da Petrobras',0,123123);
+INSERT INTO conta VALUES (123123,1234,1000000.00,'Joãozinho da Petrobras',0,123456);
+INSERT INTO conta VALUES (123456,1234,0.00,'Zé da Laranja',0,123456);
+INSERT INTO conta VALUES (222333,2222,500.00,'Jose Fernando',0,123456);
 
 
 create table RegistroDeOperacao(

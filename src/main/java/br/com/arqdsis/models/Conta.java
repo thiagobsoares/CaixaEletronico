@@ -68,18 +68,37 @@ public class Conta {
 		this.cliente = cliente;
 	}
 
-	public Boolean recuperarConta() {
+	public Boolean recuperarContaSenha() {
 		ContaTO contaTO = new ContaTO();
 
 		contaTO.setNumeroAgencia(numeroAgencia);
 		contaTO.setNumeroConta(numeroConta);
 		contaTO.setSenha(senha);
-		if(contaDAO.recuperarConta(contaTO) != null){
+		if(contaDAO.recuperarContaSenha(contaTO) != null){
 			
 			cliente = contaTO.getCliente();
 			numeroAgencia = contaTO.getNumeroAgencia();
 			numeroConta = contaTO.getNumeroConta();
 			senha = contaTO.getSenha();
+			saldo = contaTO.getSaldo();
+			administrador = contaTO.getAdministrador();
+			
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public Boolean recuperarConta() {
+		ContaTO contaTO = new ContaTO();
+
+		contaTO.setNumeroAgencia(numeroAgencia);
+		contaTO.setNumeroConta(numeroConta);
+		if(contaDAO.recuperarConta(contaTO) != null){
+			
+			cliente = contaTO.getCliente();
+			numeroAgencia = contaTO.getNumeroAgencia();
+			numeroConta = contaTO.getNumeroConta();
 			saldo = contaTO.getSaldo();
 			administrador = contaTO.getAdministrador();
 			
